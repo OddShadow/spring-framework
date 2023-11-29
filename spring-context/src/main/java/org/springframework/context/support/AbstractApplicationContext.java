@@ -572,6 +572,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 				invokeBeanFactoryPostProcessors(beanFactory);
 
 				// Register bean processors that intercept bean creation.
+				// 注册所有 BeanPostProcessors 的时机
 				registerBeanPostProcessors(beanFactory);
 				beanPostProcess.end();
 
@@ -588,6 +589,8 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 				registerListeners();
 
 				// Instantiate all remaining (non-lazy-init) singletons.
+				// !!! 所有 remaining 的单例非懒加载 Bean 的调用点
+				// getBean => doGetBean => createBean => AbstractAutowireCapableBeanFactory#doCreateBean
 				finishBeanFactoryInitialization(beanFactory);
 
 				// Last step: publish corresponding event.

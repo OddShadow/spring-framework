@@ -42,7 +42,27 @@ import org.springframework.lang.Nullable;
  * @see org.springframework.transaction.interceptor.TransactionAttribute
  */
 public interface TransactionDefinition {
-
+	
+	// int PROPAGATION_REQUIRED = 0; // 有则加入，没有则创建
+	// int PROPAGATION_SUPPORTS = 1; // 有则加入，没有则不用事务
+	// int PROPAGATION_MANDATORY = 2; // 有则加入，没有则抛出异常
+	// int PROPAGATION_REQUIRES_NEW = 3; // 有创建，没有创建
+	// int PROPAGATION_NOT_SUPPORTED = 4; // 有则挂起，没有则不用事务
+	// int PROPAGATION_NEVER = 5; // 有则抛出异常，没有则不用事务
+	// int PROPAGATION_NESTED = 6; // 嵌套，有则嵌套，没有则创建
+	
+	// int ISOLATION_DEFAULT = -1; // 和数据库保持一致
+	// int ISOLATION_READ_UNCOMMITTED = 1;  // 未提交读
+	// int ISOLATION_READ_COMMITTED = 2;  // 读已提交，sqlserver默认
+	// int ISOLATION_REPEATABLE_READ = 4;  // 可重复读，mysql默认
+	// int ISOLATION_SERIALIZABLE = 8;  // 串行序列化
+	
+	// 一类更新丢失
+	// 二类更新丢失
+	// 脏读
+	// 不可重复读
+	// 幻读
+	
 	/**
 	 * Support a current transaction; create a new one if none exists.
 	 * Analogous to the EJB transaction attribute of the same name.
@@ -70,6 +90,7 @@ public interface TransactionDefinition {
 	 * @see org.springframework.transaction.support.AbstractPlatformTransactionManager#setTransactionSynchronization
 	 * @see org.springframework.transaction.support.AbstractPlatformTransactionManager#SYNCHRONIZATION_ON_ACTUAL_TRANSACTION
 	 */
+	// 有则加入，没有则不用事务
 	int PROPAGATION_SUPPORTS = 1;
 
 	/**
@@ -78,6 +99,7 @@ public interface TransactionDefinition {
 	 * <p>Note that transaction synchronization within a {@code PROPAGATION_MANDATORY}
 	 * scope will always be driven by the surrounding transaction.
 	 */
+	// 强制，有则加入，没有则抛出异常
 	int PROPAGATION_MANDATORY = 2;
 
 	/**
@@ -93,6 +115,7 @@ public interface TransactionDefinition {
 	 * and resumed appropriately.
 	 * @see org.springframework.transaction.jta.JtaTransactionManager#setTransactionManager
 	 */
+	// 来个新的，有没有都要创建事务
 	int PROPAGATION_REQUIRES_NEW = 3;
 
 	/**
@@ -108,6 +131,7 @@ public interface TransactionDefinition {
 	 * will be suspended and resumed appropriately.
 	 * @see org.springframework.transaction.jta.JtaTransactionManager#setTransactionManager
 	 */
+	// 有则挂起，没有则不用事务
 	int PROPAGATION_NOT_SUPPORTED = 4;
 
 	/**
@@ -116,6 +140,7 @@ public interface TransactionDefinition {
 	 * <p>Note that transaction synchronization is <i>not</i> available within a
 	 * {@code PROPAGATION_NEVER} scope.
 	 */
+	// 有则抛出异常，没有则不用事务
 	int PROPAGATION_NEVER = 5;
 
 	/**
@@ -129,6 +154,7 @@ public interface TransactionDefinition {
 	 * nested transactions as well.
 	 * @see org.springframework.jdbc.datasource.DataSourceTransactionManager
 	 */
+	// 嵌套，有则嵌套，没有则创建
 	int PROPAGATION_NESTED = 6;
 
 
@@ -137,6 +163,7 @@ public interface TransactionDefinition {
 	 * All other levels correspond to the JDBC isolation levels.
 	 * @see java.sql.Connection
 	 */
+	// 和数据库保持一致
 	int ISOLATION_DEFAULT = -1;
 
 	/**
@@ -148,6 +175,7 @@ public interface TransactionDefinition {
 	 * retrieved an invalid row.
 	 * @see java.sql.Connection#TRANSACTION_READ_UNCOMMITTED
 	 */
+	// 未提交读
 	int ISOLATION_READ_UNCOMMITTED = 1;  // same as java.sql.Connection.TRANSACTION_READ_UNCOMMITTED;
 
 	/**
@@ -157,6 +185,7 @@ public interface TransactionDefinition {
 	 * with uncommitted changes in it.
 	 * @see java.sql.Connection#TRANSACTION_READ_COMMITTED
 	 */
+	// 读已提交
 	int ISOLATION_READ_COMMITTED = 2;  // same as java.sql.Connection.TRANSACTION_READ_COMMITTED;
 
 	/**
@@ -168,6 +197,7 @@ public interface TransactionDefinition {
 	 * getting different values the second time (a "non-repeatable read").
 	 * @see java.sql.Connection#TRANSACTION_REPEATABLE_READ
 	 */
+	// 可重复读
 	int ISOLATION_REPEATABLE_READ = 4;  // same as java.sql.Connection.TRANSACTION_REPEATABLE_READ;
 
 	/**
@@ -181,6 +211,7 @@ public interface TransactionDefinition {
 	 * in the second read.
 	 * @see java.sql.Connection#TRANSACTION_SERIALIZABLE
 	 */
+	// 串行序列化
 	int ISOLATION_SERIALIZABLE = 8;  // same as java.sql.Connection.TRANSACTION_SERIALIZABLE;
 
 

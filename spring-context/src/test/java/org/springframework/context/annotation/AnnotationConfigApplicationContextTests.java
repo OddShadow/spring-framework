@@ -45,6 +45,7 @@ import static org.springframework.util.StringUtils.uncapitalize;
 @SuppressWarnings("resource")
 class AnnotationConfigApplicationContextTests {
 
+	// AnnotationConfigApplicationContext 的测试
 	@Test
 	void scanAndRefresh() {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();

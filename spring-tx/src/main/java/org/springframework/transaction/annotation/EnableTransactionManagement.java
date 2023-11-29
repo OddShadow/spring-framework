@@ -162,6 +162,15 @@ import org.springframework.core.Ordered;
 @Import(TransactionManagementConfigurationSelector.class)
 public @interface EnableTransactionManagement {
 
+	// 术语
+	// 1. Aspect 切面，Advice + PointCut，一般 @Component + @Aspect 标注在类上表示整个切面类
+	// 2. JoinPoint 连接点，原代码和增强代码交汇的时机点，环绕通知可以具象为 joinPoint.proceed(); 这句代码
+	// 3. Advice 通知，增强的代码
+	// 4. PointCut 切入点，@Pointcut 的切入点表达式，表示从哪里插入 Advice，可以匹配多个 JoinPoint
+	// 5. Introduction 引入
+	// 6. TargetObject 目标对象
+	// 7. Weaving 织入
+	
 	/**
 	 * Indicate whether subclass-based (CGLIB) proxies are to be created ({@code true}) as
 	 * opposed to standard Java interface-based proxies ({@code false}). The default is
